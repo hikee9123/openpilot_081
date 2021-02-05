@@ -494,7 +494,7 @@ static void ui_draw_debug(UIState *s)
   x_pos = ui_viz_rx + 300;
   y_pos = 100+250; 
 
-  ui_print( s, x_pos, y_pos+0,   "sR:%.2f,%.2f  Fan:%.1f", scene.liveParams.steerRatio, , scene.pathPlan.steerRatio, scene.fanSpeed/1000. );
+  ui_print( s, x_pos, y_pos+0,   "sR:%.2f,%.2f  Fan:%.1f", scene.liveParams.steerRatio, scene.pathPlan.steerRatio, scene.fanSpeed/1000. );
   ui_print( s, x_pos, y_pos+50,  "aO:%.2f, %.2f", scene.liveParams.angleOffset, scene.liveParams.angleOffsetAverage );
   ui_print( s, x_pos, y_pos+100, "sF:%.2f MS:%.0f", scene.liveParams.stiffnessFactor, scene.model_speed );
 
