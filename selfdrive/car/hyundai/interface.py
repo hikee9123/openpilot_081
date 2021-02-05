@@ -318,12 +318,14 @@ class CarInterface(CarInterfaceBase):
     CP.atomTuning.sRsteerRatioV = ATOMC.sR_steerRatioV
     CP.atomTuning.sRsteerActuatorDelayV = ATOMC.sR_ActuatorDelayV
     
+
     CP.lateralsRatom.deadzone = ATOMC.sR_pid_deadzone      # OK
     CP.lateralsRatom.steerOffset = ATOMC.steerOffset       # OK
     CP.lateralsRatom.cameraOffset = ATOMC.cameraOffset
     CP.lateralsRatom.opkrAutoResume = ATOMC.ap_autoReasume
     CP.lateralsRatom.opkrAutoScreenOff = ATOMC.ap_autoScnOffTime
-
+    CP.lateralsRatom.learnerParams = ATOMC.learnerParams
+    
     CP.steerRateCost = ATOMC.steerRateCost
     CP.steerLimitTimer = ATOMC.steerLimitTimer
     

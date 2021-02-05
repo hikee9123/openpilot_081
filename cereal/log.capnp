@@ -554,7 +554,7 @@ struct ControlsState @0x97ff69c53601abf1 {
   output @58 :Float32;
   alertTextMsg1  @59 :Text;
   alertTextMsg2  @60 :Text;
-  modelSum  @61 :Float32;
+  modelSpeed  @61 :Float32;
 
   lateralControlState :union {
     indiState @52 :LateralINDIState;
@@ -882,7 +882,8 @@ struct PathPlan {
   desire @17 :Desire;
   laneChangeState @18 :LaneChangeState;
   laneChangeDirection @19 :LaneChangeDirection;
-
+  steerRatio @20 :Float32;
+  
   enum Desire {
     none @0;
     turnLeft @1;

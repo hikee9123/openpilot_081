@@ -192,9 +192,16 @@ class PathPlanner():
     # Run MPC
     self.angle_steers_des_prev = self.angle_steers_des_mpc
 
+    
     # Update vehicle model
-    x = max(sm['liveParameters'].stiffnessFactor, 0.1)
-    sr = max(sm['liveParameters'].steerRatio, 0.1)
+
+    if lateralsRatom.learnerParams:
+      sr = max(sm['liveParameters'].steerRatio, 0.1)
+    else:
+      sr_value = sm['controlsState'].modelSpeed
+      sr = self.atom_tune( v_ego_kph, sr_value, atomTuning)
+  
+    x = max(sm['liveParameters'].stiffnessFactor, 0.1)  
     VM.update_params(x, sr)
 
     curvature_factor = VM.curvature_factor(v_ego)
@@ -364,7 +371,7 @@ class PathPlanner():
     plan_send.pathPlan.desire = desire
     plan_send.pathPlan.laneChangeState = self.lane_change_state
     plan_send.pathPlan.laneChangeDirection = self.lane_change_direction
-
+    plan_send.pathPlan.steerRatio = self.steerRatio
     pm.send('pathPlan', plan_send)
 
     if LOG_MPC:

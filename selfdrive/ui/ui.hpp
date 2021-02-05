@@ -183,7 +183,7 @@ typedef struct UIScene {
   float latitudeUblox;
   float longitudeUblox;
 
-  float model_sum;
+  float model_speed;
   float v_cruise;
   float v_ego;
   float curvature;  
@@ -257,7 +257,7 @@ typedef struct UIScene {
   struct _PathPlan
   {
     float laneWidth;
-   // float steerRatio;
+    float steerRatio;
    // float steerActuatorDelay;
 
     float cProb;

@@ -454,6 +454,7 @@ struct CarParams {
     cameraOffset @2 :Float32;
     opkrAutoResume @3 :Int16;
     opkrAutoScreenOff @4 :Int16;
+    learnerParams @5 :Int16;       
   }
 
   struct LateralParams {

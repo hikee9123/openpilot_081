@@ -181,7 +181,7 @@ void update_sockets(UIState *s) {
     {
        ui_awake_aleat( s );
     }
-    scene.model_sum = scene.controls_state.getModelSum();
+    scene.model_speed = scene.controls_state.getModelSpeed();
     scene.canErrorCounter = scene.controls_state.getCanErrorCounter();
     scene.v_cruise = scene.controls_state.getVCruise();
     scene.v_ego = scene.controls_state.getVEgo();
@@ -384,9 +384,8 @@ void update_sockets(UIState *s) {
    if (sm.updated("pathPlan"))
    {
     scene.path_plan = sm["pathPlan"].getPathPlan();
-
     scene.pathPlan.laneWidth = scene.path_plan.getLaneWidth();
-   // scene.pathPlan.steerRatio = scene.path_plan.getSteerRatio();
+    scene.pathPlan.steerRatio = scene.path_plan.getSteerRatio();
     scene.pathPlan.cProb = scene.path_plan.getCProb();
     scene.pathPlan.lProb = scene.path_plan.getLProb();
     scene.pathPlan.rProb = scene.path_plan.getRProb();

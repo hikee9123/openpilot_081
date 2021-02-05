@@ -32,12 +32,14 @@ class AtomConf():
     self.cameraOffset = 0.05
     self.ap_autoReasume = 1
     self.ap_autoScnOffTime = 0
+    self.learnerParams = 1
 
     self.read_tune()
 
 
   def read_tune(self):
     conf = self.kegman.read_config()
+    self.learnerParams = conf['learnerParams']
     self.ap_autoReasume = conf['ap_autoReasume']
     self.ap_autoScnOffTime = conf['ap_autoScnOffTime']
     self.tun_type   = conf['tun_type']
