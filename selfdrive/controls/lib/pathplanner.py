@@ -199,6 +199,7 @@ class PathPlanner():
       sr = max(sm['liveParameters'].steerRatio, 0.1)
     else:
       sr_value = sm['controlsState'].modelSpeed
+      sr_value = self.m_avg.get_avg( sr_value, 50)
       sr = self.atom_tune( v_ego_kph, sr_value, atomTuning)
   
     x = max(sm['liveParameters'].stiffnessFactor, 0.1)  
