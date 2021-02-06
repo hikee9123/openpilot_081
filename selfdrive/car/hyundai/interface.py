@@ -261,7 +261,7 @@ class CarInterface(CarInterfaceBase):
     ret.lateralsRatom.cameraOffset = ATOMC.cameraOffset
     ret.lateralsRatom.opkrAutoResume = ATOMC.ap_autoReasume
     ret.lateralsRatom.opkrAutoScreenOff = ATOMC.ap_autoScnOffTime
-
+    ret.lateralsRatom.learnerParams = ATOMC.learnerParams
     ret.steerRateCost = ATOMC.steerRateCost
     ret.steerLimitTimer = ATOMC.steerLimitTimer
     # atom  END
