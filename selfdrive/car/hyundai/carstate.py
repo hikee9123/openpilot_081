@@ -44,7 +44,7 @@ class CarState(CarStateBase):
     self.leftBlindspot_time = 0
     self.rightBlindspot_time = 0
 
-    self.time_delay_int = 500
+    self.time_delay_int = 600
 
     self.SC = SpdController()
 
