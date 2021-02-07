@@ -264,7 +264,7 @@ class CarController():
     if steer_req:
       can_sends.append( create_mdps12(self.packer, frame, CS.mdps12) )
 
-    str_log1 = 'CV={:5.0f}/{:5.1f} torg:{:5.0f}/{:5.0f}'.format( self.model_speed, self.model_sum , apply_steer, new_steer,   )
+    str_log1 = 'torg:{:5.0f}/{:5.0f}'.format( apply_steer, new_steer   )
     str_log2 = 'limit={:.0f} tm={:.1f} gap={:.0f}'.format( apply_steer_limit, self.timer1.sampleTime(), CS.cruiseGapSet  )
     trace1.printf( '{} {}'.format( str_log1, str_log2 ) )
 
