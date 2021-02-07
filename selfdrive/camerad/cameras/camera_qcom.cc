@@ -35,7 +35,7 @@
 
 extern volatile sig_atomic_t do_exit;
 
-float front_camera_lens_true_pos;
+extern float front_camera_lens_true_pos;
 
 // global var for AE/AF ops
 std::atomic<CameraExpInfo> rear_exp{{0}};

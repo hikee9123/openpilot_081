@@ -20,7 +20,7 @@ extern "C"{
 #include "sidebar.hpp"
 
 
-extern float front_camera_lens_true_pos;
+float front_camera_lens_true_pos = 0.0;
 float  fFontSize = 0.8;
 
 void ui_awake_aleat(UIState *s, bool awake)
