@@ -44,6 +44,8 @@ class CarState(CarStateBase):
     self.leftBlindspot_time = 0
     self.rightBlindspot_time = 0
 
+    self.time_delay_int = 0
+
     self.SC = SpdController()
 
     self.sm = messaging.SubMaster(['liveMapData'])
@@ -108,8 +110,13 @@ class CarState(CarStateBase):
     self.acc_active = (cp.vl["SCC12"]['ACCMode'] != 0)
     self.update_atom( cp, cp_cam )
 
-    ret.cruiseState.available = self.main_on and self.cruiseState_modeSel != 3
+    if self.time_delay_int > 200:
+      ret.cruiseState.available = self.main_on and self.cruiseState_modeSel != 3
+    else:
+      ret.cruiseState.available = False
+
     ret.cruiseState.enabled =  ret.cruiseState.available and self.gearShifter == GearShifter.drive and  not ret.doorOpen  and  not ret.seatbeltUnlatched
+
     ret.cruiseState.standstill = cp.vl["SCC11"]['SCCInfoDisplay'] == 4.
 
     self.cruiseState_modeSel , speed_kph = self.SC.update_cruiseSW( self )
