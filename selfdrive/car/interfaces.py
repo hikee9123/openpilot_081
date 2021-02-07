@@ -25,7 +25,7 @@ class CarInterfaceBase():
 
     self.frame = 0
     self.low_speed_alert = False
-    self.cruise_enabled_prev = False
+    self.cruise_enabled_prev = True
     self.pcm_enable_prev = False
     self.pcm_enable_cmd = False 
 
@@ -166,10 +166,6 @@ class CarInterfaceBase():
 
     if not pcm_enable:
       pass
-    elif cs_out.gearShifter != GearShifter.drive:
-      self.cruise_enabled_prev = cs_out.cruiseState.enabled
-      if self.pcm_enable_prev:
-        self.pcm_enable_cmd = False
     elif cs_out.cruiseState.enabled != self.cruise_enabled_prev:
       self.cruise_enabled_prev = cs_out.cruiseState.enabled
       if cs_out.cruiseState.enabled:
