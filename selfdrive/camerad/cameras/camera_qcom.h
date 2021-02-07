@@ -28,8 +28,8 @@
 
 #define NUM_FOCUS 8
 
-#define LP3_AF_DAC_DOWN 366
-#define LP3_AF_DAC_UP   390  // 634
+#define LP3_AF_DAC_DOWN 390  //366
+#define LP3_AF_DAC_UP   450  // 634
 #define LP3_AF_DAC_M 440
 #define LP3_AF_DAC_3SIG 52
 #define OP3T_AF_DAC_DOWN 224
