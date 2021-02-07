@@ -35,7 +35,7 @@
 
 extern volatile sig_atomic_t do_exit;
 
-extern float front_camera_lens_true_pos;
+
 
 // global var for AE/AF ops
 std::atomic<CameraExpInfo> rear_exp{{0}};
@@ -1815,7 +1815,7 @@ static void do_autofocus(CameraState *s, SubMaster *sm) {
   int target = std::clamp(lens_true_pos - sag, float(dac_down), float(dac_up));
   s->lens_true_pos.store(lens_true_pos);
 
-  front_camera_lens_true_pos = lens_true_pos;
+
   /*char debug[4096];
   char *pdebug = debug;
   pdebug += sprintf(pdebug, "focus ");
