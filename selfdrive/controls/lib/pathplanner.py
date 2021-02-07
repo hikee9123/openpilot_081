@@ -195,13 +195,16 @@ class PathPlanner():
     
     # Update vehicle model
 
-    if lateralsRatom.learnerParams:
+    if lateralsRatom.learnerParams == 1:
       sr = max(sm['liveParameters'].steerRatio, 0.1)
+    elif lateralsRatom.learnerParams == 2:
+      sr_value = self.angle_steers_des_mpc
+      sr = self.atom_tune( v_ego_kph, sr_value, atomTuning) 
     else:
       sr_value = sm['controlsState'].modelSpeed
       sr_value = self.m_avg.get_avg( sr_value, 50)
       sr = self.atom_tune( v_ego_kph, sr_value, atomTuning)
-  
+
     x = max(sm['liveParameters'].stiffnessFactor, 0.1)  
     VM.update_params(x, sr)
 
