@@ -20,6 +20,7 @@ extern "C"{
 #include "sidebar.hpp"
 
 
+extern float front_camera_lens_true_pos;
 float  fFontSize = 0.8;
 
 void ui_awake_aleat(UIState *s, bool awake)
@@ -498,12 +499,12 @@ static void ui_draw_debug(UIState *s)
   ui_print( s, x_pos, y_pos+50,  "aO:%.2f, %.2f", scene.liveParams.angleOffset, scene.liveParams.angleOffsetAverage );
   ui_print( s, x_pos, y_pos+100, "sF:%.2f CV:%.0f", scene.liveParams.stiffnessFactor, scene.model_speed );
 
-  //ui_print( s, x_pos, y_pos+200, "prob:%.2f, %.2f", scene.pathPlan.lProb, scene.pathPlan.rProb );
+
   ui_print( s, x_pos, y_pos+200, "prob:%.2f, %.2f, %.2f, %.2f", scene.lane_line_probs[0], scene.lane_line_probs[1], scene.lane_line_probs[2], scene.lane_line_probs[3] );
   //ui_print( s, x_pos, y_pos+300, "edge:%.2f, %.2f", scene.road_edge_stds[0], scene.road_edge_stds[1] );
 
 
-  ui_print( s, x_pos, y_pos+250, "lW:%.2f  cpuPerc:%d", scene.pathPlan.laneWidth, scene.kegman.cpuPerc );
+  ui_print( s, x_pos, y_pos+250, "lW:%.2f  cpuPerc:%d"  cf:%.2f, scene.pathPlan.laneWidth, scene.kegman.cpuPerc, front_camera_lens_true_pos );
 
   float  dPoly = scene.pathPlan.lPoly + scene.pathPlan.rPoly;
   ui_print( s, x_pos, y_pos+300, "Poly:%.2f, %.2f = %.2f", scene.pathPlan.lPoly, scene.pathPlan.rPoly, dPoly );
