@@ -44,7 +44,7 @@ class CarState(CarStateBase):
     self.leftBlindspot_time = 0
     self.rightBlindspot_time = 0
 
-    self.time_delay_int = 0
+    self.time_delay_int = 200
 
     self.SC = SpdController()
 
@@ -110,9 +110,10 @@ class CarState(CarStateBase):
     self.acc_active = (cp.vl["SCC12"]['ACCMode'] != 0)
     self.update_atom( cp, cp_cam )
 
-    if self.time_delay_int > 200:
+    if self.time_delay_int <= 0:
       ret.cruiseState.available = self.main_on and self.cruiseState_modeSel != 3
     else:
+      self.time_delay_int -= 1
       ret.cruiseState.available = False
 
     ret.cruiseState.enabled =  ret.cruiseState.available and self.gearShifter == GearShifter.drive and  not ret.doorOpen  and  not ret.seatbeltUnlatched
