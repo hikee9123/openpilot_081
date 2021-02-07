@@ -519,6 +519,11 @@ static void ui_draw_debug(UIState *s)
   ui_print( s, x_pos, y_pos+350, "tpms:%.1f,%.1f,%.1f,%.1f", fl, fr, rl, rr );
 
 
+  int  lensPos = scene.frame.getLensPos();
+  int  lensTruePos = scene.frame.getLensTruePos();
+  int  lensErr = scene.frame.getLensErr();
+  ui_print( s, x_pos, y_pos+400, "frame:%d,%d,%d", lensPos, lensTruePos, lensErr );
+
   //bool curvatureValid = scene.live.MapData.getCurvatureValid();
   //int   wayId = scene.live.MapData.getWayId();
   //float curvature = scene.live.MapData.getCurvature();

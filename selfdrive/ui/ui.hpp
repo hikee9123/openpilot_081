@@ -146,7 +146,7 @@ typedef struct UIScene {
 
 
 
-
+  cereal::FrameData::Reader   frame;
   cereal::CarState::Reader car_state;
   //cereal::CarControl::Reader car_control;
   cereal::PathPlan::Reader path_plan;

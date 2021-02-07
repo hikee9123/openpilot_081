@@ -380,6 +380,10 @@ void update_sockets(UIState *s) {
     scene.liveParams.posenetSpeed = data.getPosenetSpeed();
   }  
 
+  if( sm.updated("frame") )
+  {
+    scene.frame = sm["frame"].getFrame();
+  }
 
    if (sm.updated("pathPlan"))
    {
