@@ -504,7 +504,7 @@ static void ui_draw_debug(UIState *s)
   //ui_print( s, x_pos, y_pos+300, "edge:%.2f, %.2f", scene.road_edge_stds[0], scene.road_edge_stds[1] );
 
 
-  ui_print( s, x_pos, y_pos+250, "lW:%.2f  cpuPerc:%d"  cf:%.2f, scene.pathPlan.laneWidth, scene.kegman.cpuPerc, front_camera_lens_true_pos );
+  ui_print( s, x_pos, y_pos+250, "lW:%.2f  cpuPerc:%d cf:%.2f", scene.pathPlan.laneWidth, scene.kegman.cpuPerc, front_camera_lens_true_pos );
 
   float  dPoly = scene.pathPlan.lPoly + scene.pathPlan.rPoly;
   ui_print( s, x_pos, y_pos+300, "Poly:%.2f, %.2f = %.2f", scene.pathPlan.lPoly, scene.pathPlan.rPoly, dPoly );
