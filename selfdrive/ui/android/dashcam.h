@@ -352,7 +352,7 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
     int btn_y = 1080 - btn_h;
 
 
-  if( touched && screen_button_clicked(touch_x, touch_y, btn_x, btn_y, 400, 400) )
+  if( touched && screen_button_clicked(touch_x, touch_y, btn_x, btn_y, 100, 100) )
     dash_menu_no++;    
 
     nvgBeginPath(s->vg);
@@ -388,7 +388,7 @@ void dashcam(UIState *s, int touch_x, int touch_y, int touched)
 {
   screen_draw_button(s, touch_x, touch_y);
   screen_menu_button(s, touch_x, touch_y, touched);
-  if (screen_button_clicked(touch_x, touch_y, 1700, 1000, 400, 400) )
+  if (screen_button_clicked(touch_x, touch_y, 1700, 1000, 100, 100) )
   {
     click_elapsed_time = get_time() - click_time;
 
