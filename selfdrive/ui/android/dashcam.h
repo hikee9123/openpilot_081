@@ -210,11 +210,17 @@ bool screen_lock_button_clicked(int touch_x, int touch_y, dashcam_element el)
   return false;
 }
 
-bool screen_button_clicked(int touch_x, int touch_y)
+bool screen_button_clicked(int touch_x, int touch_y, int x, int y, int cx, int cy )
 {
-  if (touch_x >= 1660 && touch_x <= 1810)
+   int max_x = x + cx;
+   int max_y = y + cy;
+   int min_x = x - cx;
+   int min_y = y - cy;
+
+
+  if (touch_x >= max_x && touch_x <= max_y)
   {
-    if (touch_y >= 885 && touch_y <= 1035)
+    if (touch_y >= min_x && touch_y <= min_y)
     {
       return true;
     }
@@ -338,13 +344,16 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
 
   nvgTextAlign(s->vg, NVG_ALIGN_LEFT | NVG_ALIGN_BASELINE);
 
-  if( touched )
-    dash_menu_no++;
+
 
     int btn_w = 150;
     int btn_h = 150;
     int btn_x = 1530;// 1920 - btn_w;
     int btn_y = 1080 - btn_h;
+
+
+  if( touched && screen_button_clicked(touch_x, touch_y, btn_x, btn_y, 800, 800) )
+    dash_menu_no++;    
 
     nvgBeginPath(s->vg);
     nvgRoundedRect(s->vg, btn_x - 110, btn_y - 45, btn_w, btn_h, 100);
@@ -379,7 +388,7 @@ void dashcam(UIState *s, int touch_x, int touch_y, int touched)
 {
   screen_draw_button(s, touch_x, touch_y);
   screen_menu_button(s, touch_x, touch_y, touched);
-  if (screen_button_clicked(touch_x, touch_y))
+  if (screen_button_clicked(touch_x, touch_y, 1285, 1435, 400, 400) )
   {
     click_elapsed_time = get_time() - click_time;
 
