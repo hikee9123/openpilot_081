@@ -378,7 +378,7 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
 void dashcam(UIState *s, int touch_x, int touch_y, int touched)
 {
   screen_draw_button(s, touch_x, touch_y);
-  screen_menu_button(s, touch_x, touch_y, touched)
+  screen_menu_button(s, touch_x, touch_y, touched);
   if (screen_button_clicked(touch_x, touch_y))
   {
     click_elapsed_time = get_time() - click_time;
