@@ -353,7 +353,13 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
 
 
   if( touched && screen_button_clicked(touch_x, touch_y, btn_x, btn_y, 100, 100) )
-    dash_menu_no++;    
+  {
+      dash_menu_no++;
+      if( dash_menu_no > 9 )
+         dash_menu_no = 0;
+
+  }
+    
 
     nvgBeginPath(s->vg);
     nvgRoundedRect(s->vg, btn_x - 110, btn_y - 45, btn_w, btn_h, 100);
