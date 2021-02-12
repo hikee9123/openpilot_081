@@ -481,6 +481,7 @@ static void ui_draw_debug(UIState *s)
   
 
   nvgTextAlign(s->vg, NVG_ALIGN_LEFT | NVG_ALIGN_BASELINE);
+
   if (scene.gpsAccuracyUblox != 0.00) 
   {
     nvgFontSize(s->vg, 34);
@@ -488,7 +489,6 @@ static void ui_draw_debug(UIState *s)
   }
 
   nvgFontSize(s->vg, 36*1.5*fFontSize);
-
 
   //ui_print( s, ui_viz_rx+10, 50, "S:%d",  s->awake_timeout );
 

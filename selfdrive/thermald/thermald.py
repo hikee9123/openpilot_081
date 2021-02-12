@@ -22,6 +22,9 @@ from selfdrive.swaglog import cloudlog
 from selfdrive.thermald.power_monitoring import PowerMonitoring
 from selfdrive.version import get_git_branch, terms_version, training_version
 
+import re
+import subprocess
+
 ThermalConfig = namedtuple('ThermalConfig', ['cpu', 'gpu', 'mem', 'bat', 'ambient'])
 
 FW_SIGNATURE = get_expected_signature()
@@ -200,6 +203,9 @@ def thermald_thread():
 
   thermal_config = get_thermal_config()
 
+  ts_last_ip = 0
+  ip_addr = '255.255.255.255' 
+
   while 1:
     ts = sec_since_boot()
     health = messaging.recv_sock(health_sock, wait=True)
@@ -264,6 +270,20 @@ def thermald_thread():
       msg.thermal.batteryPercent = 100
       msg.thermal.batteryStatus = "Charging"
       msg.thermal.bat = 0
+
+
+    # update ip every 10 seconds
+    if ts - ts_last_ip >= 10.:
+      try:
+        result = subprocess.check_output(["ifconfig", "wlan0"], encoding='utf8')  # pylint: disable=unexpected-keyword-arg
+        ip_addr = re.findall(r"inet addr:((\d+\.){3}\d+)", result)[0][0]
+      except:
+        ip_addr = 'N/A'
+      ts_last_ip = ts
+    msg.thermal.ipAddr = ip_addr
+
+
+
 
     current_filter.update(msg.thermal.batteryCurrent / 1e6)
 
