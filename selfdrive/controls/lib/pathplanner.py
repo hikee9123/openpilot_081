@@ -326,8 +326,8 @@ class PathPlanner():
     # atom
     org_angle_steers_des = self.angle_steers_des_mpc
     if self.lane_change_state == LaneChangeState.laneChangeStarting:
-      xp = [40,70]
-      fp2 = [5,8]
+      xp = [50,70]
+      fp2 = [5,7]
       limit_steers = interp( v_ego_kph, xp, fp2 )
       self.angle_steers_des_mpc = self.limit_ctrl( org_angle_steers_des, limit_steers, angle_steers )      
     elif steeringPressed:
