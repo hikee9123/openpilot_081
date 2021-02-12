@@ -353,26 +353,26 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
     nvgStroke(s->vg);
     nvgFontSize(s->vg, 60*fFontSize);
 
-    if ( lock_current_video == false )
+
+    NVGcolor fillColor = nvgRGBA(0, 0, 255, 150);
+    if( dash_menu_no == 0)
     {
-       nvgFillColor(s->vg, nvgRGBA( 50, 50, 100, 200));
-    }
-    else if (captureState == CAPTURE_STATE_CAPTURING)
-    {
-      NVGcolor fillColor = nvgRGBA(255, 0, 0, 150);
-      nvgFillColor(s->vg, fillColor);
-      nvgFill(s->vg);
-      nvgFillColor(s->vg, nvgRGBA(255, 255, 255, 200));
+        fillColor = nvgRGBA(0, 0, 255, 50);
     }
     else
     {
-      nvgFillColor(s->vg, nvgRGBA(255, 150, 150, 200));
+        fillColor = nvgRGBA(0, 0, 255, 250);
     }
+
+    nvgFillColor(s->vg, fillColor);
+    nvgFill(s->vg);
+    nvgFillColor(s->vg, nvgRGBA(255, 255, 255, 200));
+
 
     char  szText[50];
     sprintf( szText, "%d", dash_menu_no );
 
-    nvgText(s->vg, btn_x - 75, btn_y + 50, szText, NULL);
+    nvgText(s->vg, btn_x - 50, btn_y + 50, szText, NULL);
 }
 
 void dashcam(UIState *s, int touch_x, int touch_y, int touched)
