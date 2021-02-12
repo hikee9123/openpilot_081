@@ -42,7 +42,7 @@ static void ui_draw_sidebar_network_strength(UIState *s) {
 static void ui_draw_sidebar_ip_addr(UIState *s) {
   const int network_ip_w = 220;
   const int network_ip_x = !s->scene.uilayout_sidebarcollapsed ? 38 : -(sbr_w); 
-  const int network_ip_y = 150;//255;
+  const int network_ip_y = 180;//255;
 
   char network_ip_str[20];
   snprintf(network_ip_str, sizeof(network_ip_str), "%s", s->scene.thermal.getIpAddr().cStr());
