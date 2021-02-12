@@ -328,10 +328,57 @@ void screen_toggle_record_state()
 }
 
 
+int  dash_menu_no = 0;
+static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched)
+{
+  // Set button to bottom left of screen
 
-void dashcam(UIState *s, int touch_x, int touch_y)
+  //  if (s->vision_connected && s->plus_state == 0) {
+  if (s->vision_connected == 0) return;
+
+  nvgTextAlign(s->vg, NVG_ALIGN_LEFT | NVG_ALIGN_BASELINE);
+
+  if( touched )
+    dash_menu_no++;
+
+    int btn_w = 150;
+    int btn_h = 150;
+    int btn_x = 1920 - btn_w;
+    int btn_y = 1080 - btn_h;
+
+    nvgBeginPath(s->vg);
+    nvgRoundedRect(s->vg, btn_x - 110, btn_y - 45, btn_w, btn_h, 100);
+    nvgStrokeColor(s->vg, nvgRGBA(255, 255, 255, 80));
+    nvgStrokeWidth(s->vg, 6);
+    nvgStroke(s->vg);
+    nvgFontSize(s->vg, 60*fFontSize);
+
+    if ( lock_current_video == false )
+    {
+       nvgFillColor(s->vg, nvgRGBA( 50, 50, 100, 200));
+    }
+    else if (captureState == CAPTURE_STATE_CAPTURING)
+    {
+      NVGcolor fillColor = nvgRGBA(255, 0, 0, 150);
+      nvgFillColor(s->vg, fillColor);
+      nvgFill(s->vg);
+      nvgFillColor(s->vg, nvgRGBA(255, 255, 255, 200));
+    }
+    else
+    {
+      nvgFillColor(s->vg, nvgRGBA(255, 150, 150, 200));
+    }
+
+    char  szText[50];
+    sprintf( szText, "%d", dash_menu_no );
+
+    nvgText(s->vg, btn_x, btn_y + 50, szText, NULL);
+}
+
+void dashcam(UIState *s, int touch_x, int touch_y, int touched)
 {
   screen_draw_button(s, touch_x, touch_y);
+  screen_menu_button(s, touch_x, touch_y, touched)
   if (screen_button_clicked(touch_x, touch_y))
   {
     click_elapsed_time = get_time() - click_time;
