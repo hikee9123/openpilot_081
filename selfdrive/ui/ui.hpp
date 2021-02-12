@@ -210,6 +210,8 @@ typedef struct UIScene {
 
   cereal::CarState::GearShifter  getGearShifter;  
 
+
+  int  dash_menu_no;
   struct _STATUS_
   {
       char text1[512];

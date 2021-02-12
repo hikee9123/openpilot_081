@@ -334,11 +334,11 @@ void screen_toggle_record_state()
 }
 
 
-int  dash_menu_no = 0;
+
 static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched)
 {
   // Set button to bottom left of screen
-
+  UIScene &scene = s->scene;
   //  if (s->vision_connected && s->plus_state == 0) {
   if (s->vision_connected == 0) return;
 
@@ -354,9 +354,9 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
 
   if( touched && screen_button_clicked(touch_x, touch_y, btn_x, btn_y, 100, 100) )
   {
-      dash_menu_no++;
-      if( dash_menu_no > 9 )
-         dash_menu_no = 0;
+      scene.dash_menu_no++;
+      if( scene.dash_menu_no > 9 )
+         scene.dash_menu_no = 0;
 
   }
     
@@ -370,7 +370,7 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
 
 
     NVGcolor fillColor = nvgRGBA(0, 0, 255, 150);
-    if( dash_menu_no == 0)
+    if( scene.dash_menu_no == 0)
     {
         fillColor = nvgRGBA(0, 0, 255, 50);
     }
@@ -385,7 +385,7 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
 
 
     char  szText[50];
-    sprintf( szText, "%d", dash_menu_no );
+    sprintf( szText, "%d", scene.dash_menu_no );
 
     nvgText(s->vg, btn_x - 50, btn_y + 50, szText, NULL);
 }

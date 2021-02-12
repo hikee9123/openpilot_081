@@ -467,6 +467,9 @@ static void ui_draw_vision_speedlimit(UIState *s)
 static void ui_draw_debug(UIState *s) 
 {
   UIScene &scene = s->scene;
+
+  if( scene.dash_menu_no == 0 )  return;
+
   int ui_viz_rx = scene.viz_rect.x;
   int ui_viz_rw = scene.viz_rect.w;
 
