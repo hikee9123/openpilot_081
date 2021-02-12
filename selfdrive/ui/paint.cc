@@ -479,14 +479,14 @@ static void ui_draw_debug(UIState *s)
   int  y_pos = ui_viz_rx + 300;
   int  x_pos = 100+250; 
 
-
+  nvgTextAlign(s->vg, NVG_ALIGN_LEFT | NVG_ALIGN_BASELINE);
   if( scene.dash_menu_no  )  
   {
 
 
     
 
-    nvgTextAlign(s->vg, NVG_ALIGN_LEFT | NVG_ALIGN_BASELINE);
+    
 
     if (scene.gpsAccuracyUblox != 0.00) 
     {
