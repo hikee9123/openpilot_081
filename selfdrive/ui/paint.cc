@@ -521,7 +521,7 @@ static void ui_draw_debug(UIState *s)
 
   int  lensPos = scene.frame.getLensPos();
   int  lensTruePos = scene.frame.getLensTruePos();
-  int  lensErr = scene.frame.getLensErr();
+  //int  lensErr = scene.frame.getLensErr();
   ui_print( s, x_pos, y_pos+400, "frame:%d,%d", lensPos, lensTruePos );
 
   //bool curvatureValid = scene.live.MapData.getCurvatureValid();
