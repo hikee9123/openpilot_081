@@ -172,6 +172,8 @@ int main(int argc, char* argv[]) {
         handle_sidebar_touch(s, touch_x, touch_y);
         handle_vision_touch(s, touch_x, touch_y);
       }
+
+      LOGW("touched x,y: (%d,%d)", touch_x, touch_y);
     }
 
     // Don't waste resources on drawing in case screen is off

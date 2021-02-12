@@ -459,7 +459,7 @@ static void ui_draw_vision_speedlimit(UIState *s)
     snprintf(speedlim_str, sizeof(speedlim_str), "%d", speedlim_calc);
     ui_draw_text(s->vg, text_x, viz_speedlim_y + (is_speedlim_valid ? 170 : 165), speedlim_str, 42*2.3, color, s->font_sans_bold);
   } else {
-    ui_draw_text(s->vg, text_x, viz_speedlim_y + (is_speedlim_valid ? 170 : 165), "N/A", 42*2.3, color, s->font_sans_semibold);
+    ui_draw_text(s->vg, text_x, viz_speedlim_y + (is_speedlim_valid ? 170 : 165), "-", 42*2.3, color, s->font_sans_semibold);
   }
 }
 
@@ -522,7 +522,7 @@ static void ui_draw_debug(UIState *s)
   int  lensPos = scene.frame.getLensPos();
   int  lensTruePos = scene.frame.getLensTruePos();
   int  lensErr = scene.frame.getLensErr();
-  ui_print( s, x_pos, y_pos+400, "frame:%d,%d,%d", lensPos, lensTruePos, lensErr );
+  ui_print( s, x_pos, y_pos+400, "frame:%d,%d", lensPos, lensTruePos );
 
   //bool curvatureValid = scene.live.MapData.getCurvatureValid();
   //int   wayId = scene.live.MapData.getWayId();
@@ -537,7 +537,7 @@ static void ui_draw_debug(UIState *s)
   if( scene.live.speedlimitahead_valid  )
   {
     nvgFontSize(s->vg, 80);
-    ui_print( s, x_pos, y_pos+400, "SPD:%.1f, DIST:%.1f", scene.live.speedlimitahead*3.6, scene.live.speedlimitaheaddistance  );
+    ui_print( s, x_pos, y_pos+500, "SPD:%.1f, DIST:%.1f", scene.live.speedlimitahead*3.6, scene.live.speedlimitaheaddistance  );
   }  
 
 
