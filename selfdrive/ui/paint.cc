@@ -468,8 +468,6 @@ static void ui_draw_debug(UIState *s)
 {
   UIScene &scene = s->scene;
 
-  if( scene.dash_menu_no == 0 )  return;
-
   int ui_viz_rx = scene.viz_rect.x;
   int ui_viz_rw = scene.viz_rect.w;
 
@@ -478,72 +476,77 @@ static void ui_draw_debug(UIState *s)
   const int viz_speed_w = 280;
   const int viz_speed_x = ui_viz_rx+((ui_viz_rw/2)-(viz_speed_w/2));
 
-  int  y_pos = 0;
-  int  x_pos = 0; 
+  int  y_pos = ui_viz_rx + 300;
+  int  x_pos = 100+250; 
 
-  
 
-  nvgTextAlign(s->vg, NVG_ALIGN_LEFT | NVG_ALIGN_BASELINE);
-
-  if (scene.gpsAccuracyUblox != 0.00) 
+  if( scene.dash_menu_no  )  
   {
-    nvgFontSize(s->vg, 34);
-    ui_print(s, 28, 28, "%.5f,%.5f,%.5f", scene.latitudeUblox, scene.longitudeUblox, scene.bearingUblox);
+
+
+    
+
+    nvgTextAlign(s->vg, NVG_ALIGN_LEFT | NVG_ALIGN_BASELINE);
+
+    if (scene.gpsAccuracyUblox != 0.00) 
+    {
+      nvgFontSize(s->vg, 34);
+      ui_print(s, 28, 28, "%.5f,%.5f,%.5f", scene.latitudeUblox, scene.longitudeUblox, scene.bearingUblox);
+    }
+
+    nvgFontSize(s->vg, 36*1.5*fFontSize);
+
+    //ui_print( s, ui_viz_rx+10, 50, "S:%d",  s->awake_timeout );
+
+    x_pos = ui_viz_rx + 300;
+    y_pos = 100+250; 
+
+    ui_print( s, x_pos, y_pos+0,   "sR:%.2f , %.2f  Fan:%.0f", scene.liveParams.steerRatio, scene.pathPlan.steerRatio, scene.fanSpeed/1000. );
+    ui_print( s, x_pos, y_pos+50,  "aO:%.2f, %.2f", scene.liveParams.angleOffset, scene.liveParams.angleOffsetAverage );
+    ui_print( s, x_pos, y_pos+100, "sF:%.2f CV:%.0f", scene.liveParams.stiffnessFactor, scene.model_speed );
+
+
+    ui_print( s, x_pos, y_pos+200, "prob:%.2f, %.2f, %.2f, %.2f", scene.lane_line_probs[0], scene.lane_line_probs[1], scene.lane_line_probs[2], scene.lane_line_probs[3] );
+    //ui_print( s, x_pos, y_pos+300, "edge:%.2f, %.2f", scene.road_edge_stds[0], scene.road_edge_stds[1] );
+
+
+    ui_print( s, x_pos, y_pos+250, "lW:%.2f  cpuPerc:%d", scene.pathPlan.laneWidth, scene.kegman.cpuPerc );
+
+    float  dPoly = scene.pathPlan.lPoly + scene.pathPlan.rPoly;
+    ui_print( s, x_pos, y_pos+300, "Poly:%.2f, %.2f = %.2f", scene.pathPlan.lPoly, scene.pathPlan.rPoly, dPoly );
+  // ui_print( s, x_pos, y_pos+350, "map:%d,cam:%d", scene.live.map_valid, scene.live.speedlimitahead_valid  );
+
+    // tpms
+    auto tpms = scene.car_state.getTpms();
+    float fl = tpms.getFl();
+    float fr = tpms.getFr();
+    float rl = tpms.getRl();
+    float rr = tpms.getRr();
+    ui_print( s, x_pos, y_pos+350, "tpms:%.1f,%.1f,%.1f,%.1f", fl, fr, rl, rr );
+
+
+    int  lensPos = scene.frame.getLensPos();
+    int  lensTruePos = scene.frame.getLensTruePos();
+    //int  lensErr = scene.frame.getLensErr();
+    ui_print( s, x_pos, y_pos+400, "frame:%d,%d", lensPos, lensTruePos );
+
+    //bool curvatureValid = scene.live.MapData.getCurvatureValid();
+    //int   wayId = scene.live.MapData.getWayId();
+    //float curvature = scene.live.MapData.getCurvature();
+    //float   distToTurn = scene.live.MapData.getDistToTurn();
+    //ui_print( s, x_pos, y_pos+350, "way:%d, %.5f,%.5f", curvatureValid,  curvature, distToTurn  );
+
+    ui_print( s, 0, 1020, "%s", scene.alert.text1 );
+    ui_print( s, 0, 1078, "%s", scene.alert.text2 );
+
+
   }
 
-  nvgFontSize(s->vg, 36*1.5*fFontSize);
-
-  //ui_print( s, ui_viz_rx+10, 50, "S:%d",  s->awake_timeout );
-
-  x_pos = ui_viz_rx + 300;
-  y_pos = 100+250; 
-
-  ui_print( s, x_pos, y_pos+0,   "sR:%.2f , %.2f  Fan:%.0f", scene.liveParams.steerRatio, scene.pathPlan.steerRatio, scene.fanSpeed/1000. );
-  ui_print( s, x_pos, y_pos+50,  "aO:%.2f, %.2f", scene.liveParams.angleOffset, scene.liveParams.angleOffsetAverage );
-  ui_print( s, x_pos, y_pos+100, "sF:%.2f CV:%.0f", scene.liveParams.stiffnessFactor, scene.model_speed );
-
-
-  ui_print( s, x_pos, y_pos+200, "prob:%.2f, %.2f, %.2f, %.2f", scene.lane_line_probs[0], scene.lane_line_probs[1], scene.lane_line_probs[2], scene.lane_line_probs[3] );
-  //ui_print( s, x_pos, y_pos+300, "edge:%.2f, %.2f", scene.road_edge_stds[0], scene.road_edge_stds[1] );
-
-
-  ui_print( s, x_pos, y_pos+250, "lW:%.2f  cpuPerc:%d", scene.pathPlan.laneWidth, scene.kegman.cpuPerc );
-
-  float  dPoly = scene.pathPlan.lPoly + scene.pathPlan.rPoly;
-  ui_print( s, x_pos, y_pos+300, "Poly:%.2f, %.2f = %.2f", scene.pathPlan.lPoly, scene.pathPlan.rPoly, dPoly );
- // ui_print( s, x_pos, y_pos+350, "map:%d,cam:%d", scene.live.map_valid, scene.live.speedlimitahead_valid  );
-
-  // tpms
-  auto tpms = scene.car_state.getTpms();
-  float fl = tpms.getFl();
-  float fr = tpms.getFr();
-  float rl = tpms.getRl();
-  float rr = tpms.getRr();
-  ui_print( s, x_pos, y_pos+350, "tpms:%.1f,%.1f,%.1f,%.1f", fl, fr, rl, rr );
-
-
-  int  lensPos = scene.frame.getLensPos();
-  int  lensTruePos = scene.frame.getLensTruePos();
-  //int  lensErr = scene.frame.getLensErr();
-  ui_print( s, x_pos, y_pos+400, "frame:%d,%d", lensPos, lensTruePos );
-
-  //bool curvatureValid = scene.live.MapData.getCurvatureValid();
-  //int   wayId = scene.live.MapData.getWayId();
-  //float curvature = scene.live.MapData.getCurvature();
-  //float   distToTurn = scene.live.MapData.getDistToTurn();
-  //ui_print( s, x_pos, y_pos+350, "way:%d, %.5f,%.5f", curvatureValid,  curvature, distToTurn  );
-
-  ui_print( s, 0, 1020, "%s", scene.alert.text1 );
-  ui_print( s, 0, 1078, "%s", scene.alert.text2 );
-
-
-  if( scene.live.speedlimitahead_valid  )
-  {
-    nvgFontSize(s->vg, 80);
-    ui_print( s, x_pos, y_pos+500, "SPD:%.1f, DIST:%.1f", scene.live.speedlimitahead*3.6, scene.live.speedlimitaheaddistance  );
-  }  
-
-
+    if( scene.live.speedlimitahead_valid  )
+    {
+      nvgFontSize(s->vg, 80);
+      ui_print( s, x_pos, y_pos+500, "SPD:%.1f, DIST:%.1f", scene.live.speedlimitahead*3.6, scene.live.speedlimitaheaddistance  );
+    }  
 
 
 
