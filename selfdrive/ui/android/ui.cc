@@ -167,7 +167,8 @@ int main(int argc, char* argv[]) {
     int touch_x = -1, touch_y = -1;
     int touched = touch_poll(&touch, &touch_x, &touch_y, 0);
     if (touched == 1) {
-      if( touch_x  < 1660 || touch_y < 885 )
+      //if( touch_x  < 1660 || touch_y < 885 )
+      if( touch_x  < 600 )
       {        
         handle_sidebar_touch(s, touch_x, touch_y);
         handle_vision_touch(s, touch_x, touch_y);
