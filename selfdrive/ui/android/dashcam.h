@@ -343,7 +343,7 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
 
     int btn_w = 150;
     int btn_h = 150;
-    int btn_x = 1920 - btn_w;
+    int btn_x = 1530;// 1920 - btn_w;
     int btn_y = 1080 - btn_h;
 
     nvgBeginPath(s->vg);
@@ -372,7 +372,7 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
     char  szText[50];
     sprintf( szText, "%d", dash_menu_no );
 
-    nvgText(s->vg, btn_x, btn_y + 50, szText, NULL);
+    nvgText(s->vg, btn_x - 75, btn_y + 50, szText, NULL);
 }
 
 void dashcam(UIState *s, int touch_x, int touch_y, int touched)
