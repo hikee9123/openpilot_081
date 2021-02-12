@@ -58,6 +58,7 @@ def calc_states_after_delay(states, v_ego, steer_angle, curvature_factor, steer_
 class PathPlanner():
   def __init__(self, CP):
     self.LP = LanePlanner()
+    self.CP = CP
 
     self.last_cloudlog_t = 0
     self.steer_rate_cost = CP.steerRateCost
@@ -170,12 +171,20 @@ class PathPlanner():
   
 
   def update(self, sm, pm, CP, VM):
-    atomTuning = CP.atomTuning
-    lateralsRatom = CP.lateralsRatom
+    if self.CP is None:
+      self.CP = CP
 
     cruiseState  = sm['carState'].cruiseState
     leftBlindspot = sm['carState'].leftBlindspot
     rightBlindspot = sm['carState'].rightBlindspot
+
+    if cruiseState.cruiseSwState == Buttons.CANCEL:
+      self.CP = CarInterface.live_tune( CP )
+
+    atomTuning = self.CP.atomTuning
+    lateralsRatom = self.CP.lateralsRatom
+
+
 
     v_ego = sm['carState'].vEgo
     angle_steers = sm['carState'].steeringAngle
@@ -198,7 +207,7 @@ class PathPlanner():
     if lateralsRatom.learnerParams == 0:
       sr_value = angle_steers
       sr = self.atom_tune( v_ego_kph, sr_value, atomTuning) 
-    if lateralsRatom.learnerParams == 1:
+    elif lateralsRatom.learnerParams == 1:
       sr = max(sm['liveParameters'].steerRatio, 0.1)
     elif lateralsRatom.learnerParams == 2:
       sr_value = self.angle_steers_des_mpc
@@ -338,7 +347,7 @@ class PathPlanner():
             self.angle_steers_des_mpc = self.limit_ctrl( org_angle_steers_des, DST_ANGLE_LIMIT, angle_steers )
 
     elif v_ego_kph < 30:  # 30
-      xp = [3,10,30]
+      xp = [3,15,30]
       fp2 = [1,3,5]
       limit_steers = interp( v_ego_kph, xp, fp2 )
       self.angle_steers_des_mpc = self.limit_ctrl( org_angle_steers_des, limit_steers, angle_steers )
@@ -349,7 +358,7 @@ class PathPlanner():
     mpc_nans = any(math.isnan(x) for x in self.mpc_solution[0].delta)
     t = sec_since_boot()
     if mpc_nans:
-      self.libmpc.init(MPC_COST_LAT.PATH, MPC_COST_LAT.LANE, MPC_COST_LAT.HEADING, CP.steerRateCost)
+      self.libmpc.init(MPC_COST_LAT.PATH, MPC_COST_LAT.LANE, MPC_COST_LAT.HEADING, self.CP.steerRateCost)
       self.cur_state[0].delta = math.radians(angle_steers - angle_offset) / VM.sR
 
       if t > self.last_cloudlog_t + 5.0:

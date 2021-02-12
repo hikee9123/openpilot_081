@@ -482,12 +482,6 @@ static void ui_draw_debug(UIState *s)
   nvgTextAlign(s->vg, NVG_ALIGN_LEFT | NVG_ALIGN_BASELINE);
   if( scene.dash_menu_no  )  
   {
-
-
-    
-
-    
-
     if (scene.gpsAccuracyUblox != 0.00) 
     {
       nvgFontSize(s->vg, 34);
