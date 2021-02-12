@@ -289,9 +289,19 @@ class CarInterface(CarInterfaceBase):
     return ret
 
 
+
+
+    return CP
+
   @staticmethod
-  def live_atomTuning( CP ):
+  def live_tune(CP, read=False):
     global ATOMC 
+
+
+    if read:
+      ATOMC.read_tune()
+
+    # param
     CP.atomTuning.cvKPH    = ATOMC.cv_KPH
     CP.atomTuning.cvBPV    = ATOMC.cv_BPV
     CP.atomTuning.cvsMaxV  = ATOMC.cv_sMaxV
@@ -310,38 +320,6 @@ class CarInterface(CarInterfaceBase):
 
     CP.atomTuning.sRsteerRatioV = ATOMC.sR_steerRatioV
     CP.atomTuning.sRsteerActuatorDelayV = ATOMC.sR_ActuatorDelayV
-
-    return CP
-
-  @staticmethod
-  def live_tune(CP, read=False):
-    global ATOMC 
-
-
-    if read:
-      ATOMC.read_tune()
-
-    # param
-    CP = live_atomTuning( CP )
-    
-    #CP.atomTuning.cvKPH    = ATOMC.cv_KPH
-    #CP.atomTuning.cvBPV    = ATOMC.cv_BPV
-    #CP.atomTuning.cvsMaxV  = ATOMC.cv_sMaxV
-    #CP.atomTuning.cvsdUpV  = ATOMC.cv_sdUPV
-    #CP.atomTuning.cvsdDnV  = ATOMC.cv_sdDNV
-
-    #CP.atomTuning.sRKPH     = ATOMC.sR_KPH
-    #CP.atomTuning.sRBPV     = ATOMC.sR_BPV
-    
-    #CP.atomTuning.sRlqrkiV      = ATOMC.sR_lqr_kiV
-    #CP.atomTuning.sRlqrscaleV   = ATOMC.sR_lqr_scaleV
-
-    #CP.atomTuning.sRpidKpV      = ATOMC.sR_pid_KpV
-    #CP.atomTuning.sRpidKiV      = ATOMC.sR_pid_KiV
-    #CP.atomTuning.sRpidKdV      = ATOMC.sR_pid_KdV
-
-    #CP.atomTuning.sRsteerRatioV = ATOMC.sR_steerRatioV
-    #CP.atomTuning.sRsteerActuatorDelayV = ATOMC.sR_ActuatorDelayV
     
 
     CP.lateralsRatom.deadzone = ATOMC.sR_pid_deadzone      # OK
