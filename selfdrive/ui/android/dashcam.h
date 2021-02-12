@@ -352,7 +352,7 @@ static void screen_menu_button(UIState *s, int touch_x, int touch_y, int touched
     int btn_y = 1080 - btn_h;
 
 
-  if( touched && screen_button_clicked(touch_x, touch_y, btn_x, btn_y, 800, 800) )
+  if( touched && screen_button_clicked(touch_x, touch_y, btn_x, btn_y, 400, 400) )
     dash_menu_no++;    
 
     nvgBeginPath(s->vg);
