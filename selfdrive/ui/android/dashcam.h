@@ -218,9 +218,9 @@ bool screen_button_clicked(int touch_x, int touch_y, int x, int y, int cx, int c
    int min_y = y - cy;
 
 
-  if (touch_x >= max_x && touch_x <= max_y)
+  if (touch_x >= min_x && touch_x <= max_x)
   {
-    if (touch_y >= min_x && touch_y <= min_y)
+    if (touch_y >= min_y && touch_y <= max_y)
     {
       return true;
     }
@@ -388,7 +388,7 @@ void dashcam(UIState *s, int touch_x, int touch_y, int touched)
 {
   screen_draw_button(s, touch_x, touch_y);
   screen_menu_button(s, touch_x, touch_y, touched);
-  if (screen_button_clicked(touch_x, touch_y, 1285, 1435, 400, 400) )
+  if (screen_button_clicked(touch_x, touch_y, 1700, 1000, 400, 400) )
   {
     click_elapsed_time = get_time() - click_time;
 
