@@ -30,8 +30,8 @@ class SpdctrlSlow(SpdController):
 
         if dst_lead_distance > 100:
             dst_lead_distance = 100
-        elif dst_lead_distance < 50:
-            dst_lead_distance = 50
+        elif dst_lead_distance < 10:
+            dst_lead_distance = 10
 
         if dRel < 150:
             self.time_no_lean = 0
