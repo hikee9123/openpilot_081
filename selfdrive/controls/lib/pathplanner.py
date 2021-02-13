@@ -181,8 +181,12 @@ class PathPlanner():
     #if cruiseState.cruiseSwState == Buttons.CANCEL:
     #  self.CP = CarInterface.live_tune( self.CP )
 
-    atomTuning = sm['carParams'].atomTuning
-    lateralsRatom = sm['carParams'].lateralsRatom
+    if sm['carParams'].atomTuning.sRKPH is None:
+      atomTuning = self.CP.atomTuning
+      lateralsRatom = self.CP.lateralsRatom
+    else:
+      atomTuning = sm['carParams'].atomTuning
+      lateralsRatom = sm['carParams'].lateralsRatom
     #atomTuning = self.CP.atomTuning
     #lateralsRatom = self.CP.lateralsRatom
 
