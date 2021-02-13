@@ -289,10 +289,6 @@ class CarInterface(CarInterfaceBase):
     return ret
 
 
-
-
-    return CP
-
   @staticmethod
   def live_tune(CP, read=False):
     global ATOMC 
