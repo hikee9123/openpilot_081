@@ -178,13 +178,13 @@ class PathPlanner():
     leftBlindspot = sm['carState'].leftBlindspot
     rightBlindspot = sm['carState'].rightBlindspot
 
-    if cruiseState.cruiseSwState == Buttons.CANCEL:
-      self.CP = CarInterface.live_tune( self.CP )
+    #if cruiseState.cruiseSwState == Buttons.CANCEL:
+    #  self.CP = CarInterface.live_tune( self.CP )
 
-    #atomTuning = sm['carParams'].atomTuning
-    #lateralsRatom = sm['carParams'].lateralsRatom
-    atomTuning = self.CP.atomTuning
-    lateralsRatom = self.CP.lateralsRatom
+    atomTuning = sm['carParams'].atomTuning
+    lateralsRatom = sm['carParams'].lateralsRatom
+    #atomTuning = self.CP.atomTuning
+    #lateralsRatom = self.CP.lateralsRatom
 
 
 
