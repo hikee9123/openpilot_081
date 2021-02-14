@@ -1,7 +1,8 @@
 {
-  "ap_autoReasume": 3,
-  "ap_autoScnOffTime": 10,
   "tun_type": "lqr",
+  "learnerParams": 3, 
+  "ap_autoReasume": 1,
+  "ap_autoScnOffTime": 10,
   "cv_KPH": [10,60],
   "cv_BPV": [[255],[100,255]],
   "cv_sMaxV": [[384],[384,384]],
