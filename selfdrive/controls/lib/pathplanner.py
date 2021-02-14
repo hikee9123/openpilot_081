@@ -198,7 +198,6 @@ class PathPlanner():
     active = sm['controlsState'].active
     steeringPressed  = sm['carState'].steeringPressed
     steeringTorque = sm['carState'].steeringTorque          
-
     angle_offset = sm['liveParameters'].angleOffset
 
     v_ego_kph = v_ego * CV.MS_TO_KPH
@@ -210,12 +209,9 @@ class PathPlanner():
 
     
     # Update vehicle model
-    sr = max(sm['liveParameters'].steerRatio, 0.1)
     if lateralsRatom.learnerParams == 0:
       sr_value = angle_steers
       sr = self.atom_tune( v_ego_kph, sr_value, atomTuning) 
-    elif lateralsRatom.learnerParams == 1:
-      sr = max(sm['liveParameters'].steerRatio, 0.1)
     elif lateralsRatom.learnerParams == 2:
       sr_value = self.angle_steers_des_mpc
       sr = self.atom_tune( v_ego_kph, sr_value, atomTuning) 
@@ -223,6 +219,8 @@ class PathPlanner():
       sr_value = sm['controlsState'].modelSpeed
       sr_value = self.m_avg.get_avg( sr_value, 50)
       sr = self.atom_tune( v_ego_kph, sr_value, atomTuning)
+    else:
+      sr = max(sm['liveParameters'].steerRatio, 0.1)
 
     x = max(sm['liveParameters'].stiffnessFactor, 0.1)  
     VM.update_params(x, sr)
@@ -354,8 +352,8 @@ class PathPlanner():
             self.angle_steers_des_mpc = self.limit_ctrl( org_angle_steers_des, DST_ANGLE_LIMIT, angle_steers )
 
     elif v_ego_kph < 30:  # 30
-      xp = [3,15,30]
-      fp2 = [1,3,5]
+      xp = [15,30]
+      fp2 = [3,5]
       limit_steers = interp( v_ego_kph, xp, fp2 )
       self.angle_steers_des_mpc = self.limit_ctrl( org_angle_steers_des, limit_steers, angle_steers )
 
