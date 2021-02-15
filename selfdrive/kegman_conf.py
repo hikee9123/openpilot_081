@@ -2,7 +2,7 @@ import json
 import os
 
 
-json_file_name = '/data/atom_080.json'
+json_file_name = '/data/openpilot/atom_3.json'
 
 class kegman_conf():
   def __init__(self, CP=None):
