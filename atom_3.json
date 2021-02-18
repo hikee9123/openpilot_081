@@ -15,7 +15,7 @@
   "sR_pid_KpV": [[0.2],[0.20,0.15]],
   "sR_pid_KiV": [[0.1],[0.02,0.02]],
   "sR_pid_KdV": [[2.5],[2.5,2.5]],
-  "sR_steerRatioV": [[13.75],[17.2,15.0]],
+  "sR_steerRatioV": [[13.75],[17.0,15.0]],
   "sR_ActuatorDelayV": [[0.1],[0.1,0.2]],
   "sR_pid_deadzone": 0.0,
   "steerLimitTimer": 0.8,
