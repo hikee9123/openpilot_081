@@ -120,6 +120,7 @@ class SpdController():
         if len(md.path.poly):
             path = list(md.path.poly)
 
+            print( 'path = {}'.format( path) )
             self.l_poly = np.array(md.leftLane.poly)
             self.r_poly = np.array(md.rightLane.poly)
             #self.p_poly = np.array(md.path.poly)
